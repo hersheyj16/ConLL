@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConLL
@@ -13,21 +14,16 @@ namespace ConLL
             Node Head = CreateNode(5);
             Node Tail = Utils.findTail(Head);
 
-            //Read
-            Utils.TraverseNode(Head);
+            Reader ReadingThread = new Reader(Head);
 
-            // Writes
-            Utils.AppendNode(ref Tail, "5th");
-            Utils.AppendNode(ref Tail, "6th");
-            Utils.AppendNode(ref Tail, "7th");
-            
-            //Read
-            Utils.TraverseNode(Head);
+            Thread reader = new Thread(new ThreadStart(ReadingThread.Read));
+            reader.Start();
 
-            // Writes
-            Utils.AppendNode(ref Tail, "8th");
-            Utils.AppendNode(ref Tail, "9th");
-            Utils.TraverseNode(Head);
+            //Write on main thread
+            Utils.AppendNodeHelper(Tail, 10);
+
+            reader.Join();
+
         }
 
         private static Node CreateNode(int n)

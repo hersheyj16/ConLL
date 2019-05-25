@@ -29,5 +29,14 @@ namespace ConLL
 
             return head;
         }
+
+        internal static void AppendNodeHelper(Node tail, int n)
+        {
+            String val = tail.Value;
+            for (int i = 0; i < n; i++)
+            {
+                Utils.AppendNode(ref tail, val + "-" + i);
+            }
+        }
     }
 }
