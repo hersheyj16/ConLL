@@ -10,11 +10,11 @@ namespace ConLL
     public class Node
     {
         public String Value { get; set; }
-        public Node nextNode { get; set; }
-        public Node(string value, Node nextNode)
+        public Node Next { get; set; }
+        public Node(string value, Node next)
         {
             Value = value;
-            this.nextNode = nextNode;
+            this.Next = next;
         }
 
         public Node(string value)
