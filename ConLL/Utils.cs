@@ -13,10 +13,11 @@ namespace ConLL
             }
         }
 
-        public static void AppendNode(Node tail, String val)
+        public static void AppendNode(ref Node tail, String val)
         {
             Console.WriteLine("Appending a new node with val {0} to existing node {1}", val, tail.Value);
             tail.Next = new Node(val);
+            tail = tail.Next;
         }
 
         internal static Node findTail(Node head)

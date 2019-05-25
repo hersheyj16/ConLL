@@ -11,11 +11,22 @@ namespace ConLL
         static void Main(string[] args)
         {
             Node Head = CreateNode(5);
-            Utils.TraverseNode(Head);
             Node Tail = Utils.findTail(Head);
-            Utils.AppendNode(Tail, "5th");
-            Tail = Utils.findTail(Tail);
-            Utils.AppendNode(Tail, "6th");
+
+            //Read
+            Utils.TraverseNode(Head);
+
+            // Writes
+            Utils.AppendNode(ref Tail, "5th");
+            Utils.AppendNode(ref Tail, "6th");
+            Utils.AppendNode(ref Tail, "7th");
+            
+            //Read
+            Utils.TraverseNode(Head);
+
+            // Writes
+            Utils.AppendNode(ref Tail, "8th");
+            Utils.AppendNode(ref Tail, "9th");
             Utils.TraverseNode(Head);
         }
 
