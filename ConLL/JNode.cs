@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 namespace ConLL
 {
 
-    public class Node
+    public class JNode<T>
     {
-        public String Value { get; set; }
-        public Node Next { get; set; }
-        public Node(string value, Node next)
+        public T Value { get; set; }
+        public JNode<T> Next { get; set; }
+        public JNode<T> Previous { get; set; }
+        public JNode(T value, JNode<T> next)
         {
             Value = value;
             this.Next = next;
         }
 
-        public Node(string value)
+        public JNode(T value)
         {
             Value = value;
         }

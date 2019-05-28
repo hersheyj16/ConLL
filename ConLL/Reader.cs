@@ -6,16 +6,16 @@ namespace ConLL
 {
     public class Reader
     {
-        public Node Head { get; set; }
-
-        public Reader(Node head)
-        {
-            Head = head;
-        }
-
-        public void Read()
-        {          
-            Utils.TraverseNode(Head);
-        }
+//        public JNode Head { get; set; }
+//
+//        public Reader(JNode head)
+//        {
+//            Head = head;
+//        }
+//
+//        public void Read()
+//        {          
+//            Utils.TraverseNode(Head);
+//        }
     }
 }
