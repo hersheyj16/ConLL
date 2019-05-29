@@ -2,7 +2,7 @@
 
 namespace ConLL
 {
-    internal class JLinkedListJL<T>
+    public class JLinkedListJL<T>
     {
         public JNode<T> Head { get; set; }
         public JNode<T> Tail { get; set; }

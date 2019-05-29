@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using String = System.String;
 
 namespace ConLL
 {
@@ -18,7 +19,7 @@ namespace ConLL
             ll.AddFirst(firstNode);
             ll.AddAfter(ll.First, "second");
             Console.WriteLine(ll.Count);
-
+        
             foreach (string w in ll)
             {
                 Console.WriteLine(w);
@@ -62,7 +63,16 @@ namespace ConLL
             JenList.Add(n2);
             JenList.Add(n3);
 
-            Utils.TraverseNode(JenList.Head);
+            Reader<String> ReadingThread = new Reader<string>(JenList);
+            Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
+            reader1.Start();
+            Thread reader2 = new Thread(new ThreadStart(ReadingThread.Read));
+            reader2.Start();
+
+            reader1.Join();
+            reader2.Join();
+
+
         }
 
 
