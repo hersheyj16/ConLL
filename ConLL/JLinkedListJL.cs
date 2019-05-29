@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ConLL
 {
@@ -9,6 +10,8 @@ namespace ConLL
 
         internal void Add(JNode<T> node)
         {
+            Console.WriteLine("[!]{0} Adding {1}", Thread.CurrentThread.ManagedThreadId.ToString(), node.Value);
+
             if (Head == null)
             {
                 Head = node;

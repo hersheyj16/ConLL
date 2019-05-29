@@ -60,8 +60,19 @@ namespace ConLL
             JNode<String> n3 = new JNode<string>("BooButter");
 
             JenList.Add(n1);
+
+            //writting with a writer
+            IWriter<String> WritingThread = new StringWriter(JenList, 10);
+            Thread writer1 = new Thread(new ThreadStart(WritingThread.WriteRange));
+            writer1.Start();
+
             JenList.Add(n2);
+            Thread writer2 = new Thread(new ThreadStart(WritingThread.WriteRange));
+            writer2.Start();
+
             JenList.Add(n3);
+            Thread writer3 = new Thread(new ThreadStart(WritingThread.WriteRange));
+            writer3.Start();
 
             Reader<String> ReadingThread = new Reader<string>(JenList);
             Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
@@ -69,8 +80,15 @@ namespace ConLL
             Thread reader2 = new Thread(new ThreadStart(ReadingThread.Read));
             reader2.Start();
 
+
+
+
             reader1.Join();
             reader2.Join();
+
+            writer1.Join();
+            writer2.Join();
+            writer3.Join();
 
 
         }
