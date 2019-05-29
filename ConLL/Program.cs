@@ -19,7 +19,7 @@ namespace ConLL
             ll.AddFirst(firstNode);
             ll.AddAfter(ll.First, "second");
             Console.WriteLine(ll.Count);
-        
+
             foreach (string w in ll)
             {
                 Console.WriteLine(w);
@@ -28,28 +28,28 @@ namespace ConLL
 
         public static void OldDemo()
         {
-//            JNode<String> Head = CreateStringNode(5);
-//            //Write on one thread
-//            Writer WritingThread = new Writer(Head, 10);
-//            Thread writer1 = new Thread(new ThreadStart(WritingThread.Write));
-//            writer1.Start();
-//            
-//            Writer WritingThread2 = new Writer(Head, 20);
-//            Thread writer2 = new Thread(new ThreadStart(WritingThread2.Write));
-//            writer2.Start();
-//            
-//            //Read on another Thread
-//            Reader ReadingThread = new Reader(Head);
-//            Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
-//            reader1.Start();
-//            
-//            Thread reader2 = new Thread(new ThreadStart(ReadingThread.Read));
-//            reader2.Start();
-//            
-//            writer1.Join();
-//            writer2.Join();
-//            reader1.Join();
-//            reader2.Join();
+            //            JNode<String> Head = CreateStringNode(5);
+            //            //Write on one thread
+            //            Writer WritingThread = new Writer(Head, 10);
+            //            Thread writer1 = new Thread(new ThreadStart(WritingThread.Write));
+            //            writer1.Start();
+            //            
+            //            Writer WritingThread2 = new Writer(Head, 20);
+            //            Thread writer2 = new Thread(new ThreadStart(WritingThread2.Write));
+            //            writer2.Start();
+            //            
+            //            //Read on another Thread
+            //            Reader ReadingThread = new Reader(Head);
+            //            Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
+            //            reader1.Start();
+            //            
+            //            Thread reader2 = new Thread(new ThreadStart(ReadingThread.Read));
+            //            reader2.Start();
+            //            
+            //            writer1.Join();
+            //            writer2.Join();
+            //            reader1.Join();
+            //            reader2.Join();
         }
 
         static void Main(string[] args)
@@ -60,6 +60,11 @@ namespace ConLL
             JNode<String> n3 = new JNode<string>("BooButter");
 
             JenList.Add(n1);
+
+            Reader<String> ReadingThread = new Reader<string>(JenList);
+            Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
+            reader1.Start();
+
 
             //writting with a writer
             IWriter<String> WritingThread = new StringWriter(JenList, 10);
@@ -74,9 +79,10 @@ namespace ConLL
             Thread writer3 = new Thread(new ThreadStart(WritingThread.WriteRange));
             writer3.Start();
 
-            Reader<String> ReadingThread = new Reader<string>(JenList);
-            Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
-            reader1.Start();
+            writer1.Join();
+            writer2.Join();
+            writer3.Join();
+
             Thread reader2 = new Thread(new ThreadStart(ReadingThread.Read));
             reader2.Start();
 
@@ -85,17 +91,15 @@ namespace ConLL
 
             reader1.Join();
             reader2.Join();
-
-            writer1.Join();
-            writer2.Join();
-            writer3.Join();
-
+                
+            //Test the at method.
+            for (int i = 0; i < 10; i++)
+            {
+                var ans = JenList.GetAt(i);
+                Console.WriteLine("test {0}:{1}", i, ans.Value);
+            }
 
         }
-
-
-
-
     }
 }
 

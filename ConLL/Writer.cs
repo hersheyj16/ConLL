@@ -28,16 +28,18 @@ namespace ConLL
         {
             JNode<String> n1 = new JNode<String>("test");
             JList.Add(n1);
-
         }
 
         public void WriteRange()
         {
-            for (int i = 0; i < Range; i++)
+            lock (JList.ListLock)
             {
-                String value = JList.Tail.Value + "-" + i;
-                JNode<String> n = new JNode<string>(value);
-                JList.Add(n);
+                for (int i = 0; i < Range; i++)
+                {
+                    String value = JList.Tail.Value + "-" + i;
+                    JNode<String> n = new JNode<string>(value);
+                    JList.Add(n);
+                }
             }
         }
     }
