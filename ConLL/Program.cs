@@ -55,11 +55,9 @@ namespace ConLL
         static void Main(string[] args)
         {
             JLinkedListJL<String> JenList = new JLinkedListJL<string>();
-            JNode<String> n1 = new JNode<string>("Tigs");
-            JNode<String> n2 = new JNode<string>("Husky");
-            JNode<String> n3 = new JNode<string>("BooButter");
+            JenList.Add("tiger");
+        
 
-            JenList.Add(n1);
 
             Reader<String> ReadingThread = new Reader<string>(JenList);
             Thread reader1 = new Thread(new ThreadStart(ReadingThread.Read));
@@ -67,37 +65,36 @@ namespace ConLL
 
 
             //writting with a writer
-            IWriter<String> WritingThread = new StringWriter(JenList, 10);
+            StringWriter WritingThread = new StringWriter(JenList, 10);
             Thread writer1 = new Thread(new ThreadStart(WritingThread.WriteRange));
             writer1.Start();
 
-            JenList.Add(n2);
+
             Thread writer2 = new Thread(new ThreadStart(WritingThread.WriteRange));
             writer2.Start();
 
-            JenList.Add(n3);
+
             Thread writer3 = new Thread(new ThreadStart(WritingThread.WriteRange));
             writer3.Start();
+
+            Thread writer4 = new Thread(new ThreadStart(WritingThread.WriteRange));
+            writer4.Start();
+
+            Thread writer5 = new Thread(new ThreadStart(WritingThread.WriteRange));
+            writer5.Start();
 
             writer1.Join();
             writer2.Join();
             writer3.Join();
+            writer4.Join();
+            writer5.Join();
 
             Thread reader2 = new Thread(new ThreadStart(ReadingThread.Read));
             reader2.Start();
 
-
-
-
             reader1.Join();
             reader2.Join();
-                
-            //Test the at method.
-            for (int i = 0; i < 10; i++)
-            {
-                var ans = JenList.GetAt(i);
-                Console.WriteLine("test {0}:{1}", i, ans.Value);
-            }
+
 
         }
     }
